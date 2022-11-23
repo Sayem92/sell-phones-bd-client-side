@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../../../assets/sell.png'
+import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext)
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const handleLogout = () => {
+        logOut()
+        .then(()=>{
+            // kaj ace ---------
+        })
+        .then(err=> console.log(err))
+    }
 
 
     return (
         <div className="px-4 py-5 mx-auto md:px-24 bg-slate-200">
             <div className="relative flex items-center justify-between">
-                <a
-                    href="/"
+                <Link
+                    to="/"
                     aria-label="Sell Phones BD"
                     title="Sell Phones BD"
                     className="inline-flex items-center"
@@ -21,37 +33,43 @@ const Navbar = () => {
                     <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
                         Sell Phones BD
                     </span>
-                </a>
+                </Link>
                 <ul className="flex items-center hidden space-x-8 lg:flex">
 
                     <li>
-                        <a
-                            href="/home"
+                        <Link
+                            to="/home"
                             aria-label="home"
                             title="home"
                             className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                             Home
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
-                            href="/blog"
+                        <Link
+                            to="/blog"
                             aria-label="blog"
                             title="blog"
                             className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                             Blog
-                        </a>
+                        </Link>
                     </li>
 
                 </ul>
                 <ul className="flex items-center hidden space-x-8 lg:flex">
                     <li>
+                        {
+                            user?.uid ?
+                                <button onClick={handleLogout}
+                                    className='btn bg-sky-400 hover:bg-sky-500 border-none text-white rounded-3xl'>Log out</button>
+                                :
 
-                        <button className='btn btn-info text-white rounded-3xl'>Sign up</button>
-
-                        <button className='btn btn-info text-white rounded-3xl'>Log out</button>
+                               <Link to='/register'>
+                                <button className='btn btn-info text-white rounded-3xl'>Sign up</button>
+                               </Link>
+                        }
 
                     </li>
                 </ul>
@@ -82,8 +100,8 @@ const Navbar = () => {
                             <div className="p-5 bg-white border rounded shadow-sm">
                                 <div className="flex items-center justify-between mb-4">
                                     <div>
-                                        <a
-                                            href="/"
+                                        <Link
+                                            to="/"
                                             aria-label="Sell Phones BD"
                                             title="Sell Phones BD"
                                             className="inline-flex items-center"
@@ -94,7 +112,7 @@ const Navbar = () => {
                                             <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
                                                 Sell Phones BD
                                             </span>
-                                        </a>
+                                        </Link>
                                     </div>
                                     <div>
                                         <button
@@ -115,29 +133,36 @@ const Navbar = () => {
                                 <nav>
                                     <ul className="space-y-4">
                                         <li>
-                                            <a
-                                                href="/home"
+                                            <Link
+                                                to="/home"
                                                 aria-label="home"
                                                 title="home"
                                                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                             >
                                                 Home
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a
-                                                href="/blog"
+                                            <Link
+                                                to="/blog"
                                                 aria-label="blog"
                                                 title="blog"
                                                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                             >
                                                 Blog
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                        <button className='btn btn-info text-white rounded-3xl'>Sign up</button>
+                                            {
+                                                user?.uid ?
+                                                    <button onClick={handleLogout}
+                                                        className='btn bg-sky-400 hover:bg-sky-500 border-none text-white rounded-3xl'>Log out</button>
+                                                    :
+                                                    <Link to='/register'>
+                                                    <button className='btn btn-info text-white rounded-3xl'>Sign up</button>
+                                                   </Link>
 
-                                        <button className='btn btn-info text-white rounded-3xl'>Log out</button>
+                                            }
                                         </li>
                                     </ul>
                                 </nav>
