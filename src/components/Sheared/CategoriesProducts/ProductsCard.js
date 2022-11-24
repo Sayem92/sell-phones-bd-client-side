@@ -1,7 +1,12 @@
 import React from 'react';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 const ProductsCard = ({ pro }) => {
     const { name, img, location, sellerName, usedYear, originalPrice, resalePrice, timePosted } = pro;
+    const { setProduct } = useContext(AuthContext);
+
 
     return (
         <div className="card card-compact md:w-full bg-base-100 shadow-xl">
@@ -17,7 +22,11 @@ const ProductsCard = ({ pro }) => {
                 <p className='text-xl'>{location}</p>
                 <p className='text-xl'>{timePosted}</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-info">Book Now</button>
+
+                    <Link to='/bookedForm'>
+                        <button onClick={() => setProduct(pro)}
+                            className='btn btn-info text-white'>Book Now</button>
+                    </Link>
                 </div>
             </div>
         </div>

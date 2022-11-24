@@ -26,7 +26,7 @@ const Categories = () => {
 
     return (
         <div className='py-20'>
-            <h1 className='p-2 text-4xl text-center text-blue-400 font-semibold'>Choose Your desire Brand</h1>
+            <h1 className='p-2 text-4xl text-center text-blue-400 font-semibold'>Choose Your Desire Brand</h1>
             <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 p-2 py-10 lg:px-28'>
                 {
                     categories?.map(cate => <Category
