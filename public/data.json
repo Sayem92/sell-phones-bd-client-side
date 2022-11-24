@@ -1,0 +1,17 @@
+[
+    {
+        "categoryId": 1,
+        "categoryName" : "Oppo Phones",
+        "categoryImage" : "https://i.ibb.co/3Fs43Bj/oppo-r9s-second-hand-1532238783-7ea753cd-progressive.jpg" 
+    },
+    {
+        "categoryId": 2,
+        "categoryName" : "Xiaomi Phones",
+        "categoryImage" : "https://i.ibb.co/rkTx2kr/006py-GRzly1g7leggplqxj31900u0768-1024x683.jpg" 
+    },
+    {
+        "categoryId": 3,
+        "categoryName" : "Realme Phones",
+        "categoryImage" : "https://i.ibb.co/XpZDt6Y/second-handrealme-6-1595822669-f45e8976-progressive.jpg" 
+    }
+]
