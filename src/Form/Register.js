@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { userInfoSave } from '../api/User';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 
 const Register = () => {
@@ -11,8 +12,6 @@ const Register = () => {
 
     // user signup---------
     const handleSignUp = data => {
-
-    //   console.log(data.seller);// true/false
 
         createUser(data.email, data.password)
             .then(result => {
@@ -28,6 +27,8 @@ const Register = () => {
                 updateUser(userInfo)
                     .then(() => {
                         // save data -------------
+                        saveUser(data.name, data.email, data.seller)
+                    
                     })
                     .catch(err => console.log(err));
             })
@@ -38,6 +39,28 @@ const Register = () => {
     };
 
 
+    // //save user --------
+    const saveUser = (name, email, seller) => {
+        const user = {
+            name,
+            email,
+            sellerAccount: seller
+        }
+
+        fetch(`http://localhost:5000/users`, {
+            method: "POST",
+            headers: {
+                'content-type': "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("save user", data);
+                toast.success('Save user data!');
+            })
+
+    };
 
 
 
@@ -47,6 +70,8 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                // user data save --------------
+                userInfoSave(user?.displayName,user?.email, false)
                 toast.success('Google Login Successfully!');
             })
             .catch(err => console.log(err))
@@ -98,7 +123,7 @@ const Register = () => {
                             <label className="label cursor-pointer">
                                 <span className="label-text">Seller Account</span>
                                 <input type="checkbox" {...register('seller')}
-                                 className="toggle toggle-info" />
+                                    className="toggle toggle-info" />
                             </label>
                         </div>
                     </div>

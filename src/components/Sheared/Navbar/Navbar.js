@@ -11,10 +11,10 @@ const Navbar = () => {
 
     const handleLogout = () => {
         logOut()
-        .then(()=>{
-            // kaj ace ---------
-        })
-        .then(err=> console.log(err))
+            .then(() => {
+                // kaj ace ---------
+            })
+            .then(err => console.log(err))
     }
 
 
@@ -46,6 +46,19 @@ const Navbar = () => {
                             Home
                         </Link>
                     </li>
+                    {
+                        user?.uid &&
+                        <li>
+                            <Link
+                                to="/dashboard"
+                                aria-label="dashboard"
+                                title="dashboard"
+                                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                            >
+                                Dashboard
+                            </Link>
+                        </li>
+                    }
                     <li>
                         <Link
                             to="/blog"
@@ -66,9 +79,10 @@ const Navbar = () => {
                                     className='btn bg-sky-400 hover:bg-sky-500 border-none text-white rounded-3xl'>Log out</button>
                                 :
 
-                               <Link to='/register'>
-                                <button className='btn btn-info text-white rounded-3xl'>Sign up</button>
-                               </Link>
+                                <Link to='/login'>
+                                    <button className='btn btn-info text-white rounded-3xl'>Login</button>
+                                </Link>
+
                         }
 
                     </li>
@@ -142,6 +156,19 @@ const Navbar = () => {
                                                 Home
                                             </Link>
                                         </li>
+                                        {
+                                            user?.uid &&
+                                            <li>
+                                                <Link
+                                                    to="/dashboard"
+                                                    aria-label="dashboard"
+                                                    title="dashboard"
+                                                    className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                                                >
+                                                    Dashboard
+                                                </Link>
+                                            </li>
+                                        }
                                         <li>
                                             <Link
                                                 to="/blog"
@@ -158,9 +185,9 @@ const Navbar = () => {
                                                     <button onClick={handleLogout}
                                                         className='btn bg-sky-400 hover:bg-sky-500 border-none text-white rounded-3xl'>Log out</button>
                                                     :
-                                                    <Link to='/register'>
-                                                    <button className='btn btn-info text-white rounded-3xl'>Sign up</button>
-                                                   </Link>
+                                                    <Link to='/login'>
+                                                        <button className='btn btn-info text-white rounded-3xl'>Login</button>
+                                                    </Link>
 
                                             }
                                         </li>

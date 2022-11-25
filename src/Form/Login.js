@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../AuthProvider/AuthProvider';
+import { userInfoSave } from '../api/User';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit, getValues } = useForm();
@@ -38,6 +39,8 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                 // user data save --------------
+                 userInfoSave(user?.displayName,user?.email, false);
                 toast.success('Google Login Successfully!');
             })
             .catch(err => console.log(err))
