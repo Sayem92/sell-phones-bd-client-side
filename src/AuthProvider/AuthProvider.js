@@ -14,7 +14,6 @@ const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [product, setProduct] = useState(null);
 
     // create user----
     const createUser = (email, password) => {
@@ -72,10 +71,7 @@ const AuthProvider = ({ children }) => {
         loading,
         googleLogin,
         signIn,
-        forgetPassword,
-        product,
-        setProduct
-
+        forgetPassword
 
     }
 
