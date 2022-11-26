@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/sell.png'
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
@@ -8,11 +8,13 @@ const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         logOut()
             .then(() => {
                 // kaj ace ---------
+                navigate('/')
             })
             .then(err => console.log(err))
     }
@@ -110,7 +112,7 @@ const Navbar = () => {
                         </svg>
                     </button>
                     {isMenuOpen && (
-                        <div className="absolute top-0 left-0 w-full">
+                        <div className="z-10 absolute top-0 left-0 w-full">
                             <div className="p-5 bg-white border rounded shadow-sm">
                                 <div className="flex items-center justify-between mb-4">
                                     <div>
