@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Blog from "../../components/Blog/Blog";
+import ErrorPage from "../../components/ErrorPage/ErrorPage";
 import Home from "../../components/Home/Home/Home";
 import CategoriesProducts from "../../components/Sheared/CategoriesProducts/CategoriesProducts";
 import AddProduct from "../../components/Sheared/Dasboard/AddProduct/AddProduct";
@@ -15,6 +16,7 @@ export const routes = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
+        errorElement: <ErrorPage></ErrorPage>,
         children:[
             {
                 path: '/',
@@ -43,6 +45,7 @@ export const routes = createBrowserRouter([
     {
         path: '/dashboard',
         element:  <DashBoardLayout />,
+        errorElement: <ErrorPage></ErrorPage>,
         children:[
             {
                 path: '/dashboard',
