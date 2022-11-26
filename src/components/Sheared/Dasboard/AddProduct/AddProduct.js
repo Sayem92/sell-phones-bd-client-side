@@ -2,13 +2,16 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import UseAdmin from '../../../../api/UseAdmin';
 import UseSeller from '../../../../api/UseSeller';
 import { AuthContext } from '../../../../AuthProvider/AuthProvider';
 
-// seller only ---------------------------
+// seller && admin only ---------------------------
 const AddProduct = () => {
     const { user } = useContext(AuthContext);
     const [isSeller] = UseSeller(user?.email);
+    const [isAdmin] = UseAdmin(user?.email);
+
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const imageHostKey = process.env.REACT_APP_IMGBB_key;
@@ -42,8 +45,7 @@ const AddProduct = () => {
                         phone: data.phone,
                         location: data.location,
 
-                        description: data.description,
-                        sellerEmail: user?.email,
+                        description: data.description
 
 
                     }
@@ -51,7 +53,7 @@ const AddProduct = () => {
                     // console.log(product);
 
                     // sava information to the database----------
-                    fetch(`http://localhost:5000/seller/addProduct`, {
+                    fetch(`http://localhost:5000/addProduct`, {
                         method: "POST",
                         headers: {
                             'content-type': "application/json"
@@ -187,10 +189,10 @@ const AddProduct = () => {
 
 
                     {
-                        isSeller &&
+                        (isSeller || isAdmin) &&
                         <input className='mt-3 btn btn-accent text-white w-full' type="submit" value='Submit' />
                     }
-
+                        
                 </form>
             </div>
         </div>

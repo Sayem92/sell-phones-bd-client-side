@@ -62,11 +62,7 @@ const DashBoardLayout = () => {
                                     className='text-white  bg-gray-500  md:bg-gray-400 mb-2 rounded-lg'>
                                     <Link to='/dashboard/addProduct'>Add A Product</Link>
                                 </li>
-                                {/* buyers only  */}
-                                <li
-                                    className='text-white  bg-gray-500  md:bg-gray-400 mb-2 rounded-lg'>
-                                    <Link to='/dashboard/myOrders'>My Orders</Link>
-                                </li>
+
                                 <label htmlFor="dashboard-drawer" className="md:hidden btn btn-info text-base-content">Close drawer</label>
                             </>
                         }
