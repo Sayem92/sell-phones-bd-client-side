@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import Loading from '../../../../Loading/Loading';
 import ConfirmationDeleteModal from '../Modal/ConfirmationDeleteModal';
 
@@ -25,8 +26,18 @@ const MyProducts = () => {
 
 
     const handleDeletingProduct = _id => {
-        console.log(_id);
         
+        fetch(`http://localhost:5000/product/${_id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    toast.success(`Products deleted successfully`)
+                    refetch();
+                }
+
+            })
     };
 
 
