@@ -53,12 +53,12 @@ export const routes = createBrowserRouter([
                 element: <MyOrders></MyOrders>
             },
             {
-                path: '/dashboard/myProducts',
-                element: <MyProducts></MyProducts>
-            },
-            {
                 path: '/dashboard/addProduct',
                 element: <AddProduct></AddProduct>
+            },
+            {
+                path: '/dashboard/myProducts',
+                element: <MyProducts></MyProducts>
             },
         ]
         

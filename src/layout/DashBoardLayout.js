@@ -34,13 +34,13 @@ const DashBoardLayout = () => {
                                 <>
                                     {/* seller only  */}
                                     <li
+                                        className='text-white  bg-gray-500  md:bg-gray-400 mb-2 rounded-lg'>
+                                        <Link to='/dashboard/addProduct'>Add A Product</Link>
+                                    </li>
+                                    <li
                                         className='text-white  bg-gray-500 md:bg-gray-400 mb-2 rounded-lg'>
                                         <Link to='/dashboard/myProducts'>My Products</Link>
 
-                                    </li>
-                                    <li
-                                        className='text-white  bg-gray-500  md:bg-gray-400 mb-2 rounded-lg'>
-                                        <Link to='/dashboard/addProduct'>Add A Product</Link>
                                     </li>
                                     <label htmlFor="dashboard-drawer" className="md:hidden btn btn-info text-base-content">Close drawer</label>
                                 </>
