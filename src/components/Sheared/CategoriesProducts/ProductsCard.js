@@ -16,7 +16,7 @@ const ProductsCard = ({ pro }) => {
                     <h1 className='text-xl'>Original Price: {originalPrice}</h1>
                     <h1 className='text-xl'>Resale Price: <strong>{resalePrice}</strong></h1>
                     <p className='text-xl'>Used: {usedYear} {usedYear > 1 ? 'Years' : "Year"}</p>
-                    <p className='text-xl'>Seller Name: {sellerName}</p>
+                    <p className='text-xl'>Seller: <strong> {sellerName}</strong></p>
                     <p className='text-xl'>{location}</p>
                     <p className='text-xl'>{timePosted}</p>
                     <div className="card-actions justify-end">

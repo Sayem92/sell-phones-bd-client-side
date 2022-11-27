@@ -15,6 +15,7 @@ const BookingModal = ({ product, setProduct }) => {
                 email: user?.email,
                 categoryName: product?.categoryName,
                 productName: product?.name,
+                productImage : product.img,
                 productPrice: product?.resalePrice,
                 phone: data.phone,
                 meetingLocation : data.meetingLocation,
