@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { userInfoSave } from '../api/User';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import Loading from '../Loading/Loading';
@@ -12,9 +12,11 @@ const Register = () => {
     const [signUpError, setSignUpError] = useState('');
     const imageHostKey = process.env.REACT_APP_IMGBB_key;
 
+    const navigate = useNavigate();
+
     // user signup---------
     const handleSignUp = data => {
-       
+
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
@@ -81,6 +83,7 @@ const Register = () => {
                 console.log("save user", data);
                 toast.success('Save user data!');
                 setLoading(false);
+                navigate('/')
             })
 
     };
@@ -89,7 +92,7 @@ const Register = () => {
 
     // google login----------------
     const handleGoogleLogin = () => {
-       
+
         googleLogin()
             .then(result => {
                 const user = result.user;
@@ -97,7 +100,8 @@ const Register = () => {
                 // user data save --------------
                 userInfoSave(user?.displayName, user?.email, false, user?.photoURL)
                 toast.success('Google Login Successfully!');
-                
+                navigate('/')
+
             })
             .catch(err => console.log(err))
     }

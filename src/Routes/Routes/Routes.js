@@ -13,6 +13,7 @@ import Login from "../../Form/Login";
 import Register from "../../Form/Register";
 import DashBoardLayout from "../../layout/DashBoardLayout";
 import Main from "../../layout/Main";
+import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 
 export const routes = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ export const routes = createBrowserRouter([
         children:[
             {
                 path: '/',
+                element: <Home></Home>
+            },
+            {
+                path: '/home',
                 element: <Home></Home>
             },
             {
@@ -35,7 +40,8 @@ export const routes = createBrowserRouter([
             {
                 path: '/products/:cateName',
                 loader: ({params})=> fetch(`http://localhost:5000/products/${params.cateName}`),
-                element: <CategoriesProducts></CategoriesProducts>
+                element: <PrivateRoutes>
+                    <CategoriesProducts></CategoriesProducts></PrivateRoutes>
             },
             {
                 path: '/blog',

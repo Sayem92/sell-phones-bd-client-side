@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import { userInfoSave } from '../api/User';
@@ -10,6 +10,7 @@ const Login = () => {
     const { signIn, googleLogin, forgetPassword } = useContext(AuthContext);
     const [loginError, setLoginError] = useState('');
     const [email, setEmail] = useState(null);
+    const navigate = useNavigate();
 
 
     
@@ -21,7 +22,7 @@ const Login = () => {
                 const user = Result.user;
                 console.log(user);
                 toast.success('Login Successfully!');
-               
+                navigate('/')
 
             })
             .catch(err => {
@@ -42,6 +43,7 @@ const Login = () => {
                  // user data save --------------
                  userInfoSave(user?.displayName,user?.email, false,user?.photoURL);
                 toast.success('Google Login Successfully!');
+                navigate('/')
             })
             .catch(err => console.log(err))
     }
