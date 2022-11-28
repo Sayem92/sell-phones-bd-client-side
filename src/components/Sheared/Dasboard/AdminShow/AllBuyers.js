@@ -23,7 +23,7 @@ const AllBuyers = () => {
 
         
 
-        const handleDeletingProduct = _id => {
+        const handleDeletingBuyer = _id => {
 
             const agree = window.confirm('Are you sure delete this buyer !!!')
 
@@ -59,7 +59,7 @@ const AllBuyers = () => {
         </div>
         }
 
-        
+
 
     return (
         <div className='mt-3'>
@@ -93,7 +93,7 @@ const AllBuyers = () => {
                                 <td>{buyer.email}</td>
                                 <td>
                                     <label
-                                        onClick={() => handleDeletingProduct(buyer._id)}
+                                        onClick={() => handleDeletingBuyer(buyer._id)}
                                         className="btn btn-sm btn-error text-white">Delete</label>
                                 </td>
                             </tr>)
