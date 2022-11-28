@@ -96,7 +96,7 @@ const AddProduct = () => {
                             className="file-input file-input-info file-input-bordered file-input-sm w-full max-w-xs"
                             placeholder="Your photo"
                         />
-                        {errors.img && <p className='text-red-600'>{errors.img.message}</p>}
+                        {errors.image && <p className='text-red-600'>{errors.image.message}</p>}
                     </div>
                     {/* categoryName */}
 

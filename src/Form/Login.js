@@ -40,7 +40,7 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                  // user data save --------------
-                 userInfoSave(user?.displayName,user?.email, false);
+                 userInfoSave(user?.displayName,user?.email, false,user?.photoURL);
                 toast.success('Google Login Successfully!');
             })
             .catch(err => console.log(err))

@@ -11,7 +11,7 @@ const DashBoardLayout = () => {
     const [isSeller, isSellerLoading] = UseSeller(user?.email);
     const [isAdmin] = UseAdmin(user?.email);
 
-
+console.log(user);
     if (isSellerLoading) {
         return <Loading></Loading>
     }

@@ -4,15 +4,17 @@ import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { userInfoSave } from '../api/User';
 import { AuthContext } from '../AuthProvider/AuthProvider';
+import Loading from '../Loading/Loading';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser, updateUser, googleLogin } = useContext(AuthContext);
+    const { createUser, updateUser, googleLogin, loading, setLoading } = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
+    const imageHostKey = process.env.REACT_APP_IMGBB_key;
 
     // user signup---------
     const handleSignUp = data => {
-
+       
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
@@ -20,17 +22,35 @@ const Register = () => {
                 setSignUpError('');
                 toast.success('Successfully created!');
 
-                //user update---------
-                const userInfo = {
-                    displayName: data.name
-                }
-                updateUser(userInfo)
-                    .then(() => {
-                        // save data -------------
-                        saveUser(data.name, data.email, data.seller)
-                    
+
+                const image = data.image[0]
+                const formData = new FormData();
+                formData.append('image', image)
+                const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+                fetch(url, {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(imgData => {
+                        console.log(imgData)
+                        if (imgData.success) {
+
+                            //user update---------
+                            const userInfo = {
+                                displayName: data.name,
+                                photoURL: imgData.data.display_url,
+                            }
+                            updateUser(userInfo)
+                                .then(() => {
+                                    // save data -------------
+                                    saveUser(data.name, data.email, data.seller, imgData.data.display_url)
+
+                                })
+                                .catch(err => console.log(err));
+                        }
+
                     })
-                    .catch(err => console.log(err));
             })
             .catch(err => {
                 console.log(err);
@@ -40,11 +60,12 @@ const Register = () => {
 
 
     // //save user --------
-    const saveUser = (name, email, seller) => {
+    const saveUser = (name, email, seller, photoURL) => {
         const user = {
             name,
             email,
-            sellerAccount: seller
+            sellerAccount: seller,
+            userPhoto: photoURL
         }
 
         fetch(`http://localhost:5000/users`, {
@@ -58,6 +79,7 @@ const Register = () => {
             .then(data => {
                 console.log("save user", data);
                 toast.success('Save user data!');
+                setLoading(false);
             })
 
     };
@@ -66,17 +88,23 @@ const Register = () => {
 
     // google login----------------
     const handleGoogleLogin = () => {
+       
         googleLogin()
             .then(result => {
                 const user = result.user;
                 console.log(user);
                 // user data save --------------
-                userInfoSave(user?.displayName,user?.email, false)
+                userInfoSave(user?.displayName, user?.email, false, user?.photoURL)
                 toast.success('Google Login Successfully!');
+                
             })
             .catch(err => console.log(err))
     }
 
+
+    if (loading) {
+        return <Loading></Loading>
+    }
 
     return (
 
@@ -93,6 +121,19 @@ const Register = () => {
                         })} className="input input-bordered  w-full max-w-xs" placeholder="Your name" />
 
                         {errors.name && <p className='text-red-600'>{errors.name.message}</p>}
+                    </div>
+
+                    {/* image */}
+                    <div className="form-control w-full max-w-x">
+                        <label className="label"> <span className="label-text ">User Photo</span>
+                        </label>
+                        <input type="file" {...register('image', {
+                            required: "Please select your photo"
+                        })}
+                            className="file-input file-input-info file-input-bordered  w-full max-w-xs"
+                            placeholder="Your photo"
+                        />
+                        {errors.image && <p className='text-red-600'>{errors.image.message}</p>}
                     </div>
 
                     <div className="form-control w-full max-w-x">

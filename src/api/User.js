@@ -1,8 +1,9 @@
-export const userInfoSave = (name, email, seller) => {
+export const userInfoSave = (name, email, seller, photoURL) => {
     const user = {
         name,
         email,
-        sellerAccount: seller
+        sellerAccount: seller,
+        photoURL,
     }
 
     fetch(`http://localhost:5000/users`, {
