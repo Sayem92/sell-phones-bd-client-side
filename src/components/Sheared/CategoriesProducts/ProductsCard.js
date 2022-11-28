@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import UseAdmin from '../../../api/UseAdmin';
+import UseSeller from '../../../api/UseSeller';
+import { AuthContext } from '../../../AuthProvider/AuthProvider';
 import BookingModal from './BookingModal';
 
 const ProductsCard = ({ pro }) => {
     const { name, img, location, sellerName, usedYear, originalPrice, resalePrice, timePosted } = pro;
     const [product, setProduct] = useState(null);
+    const { user } = useContext(AuthContext);
+    const [isSeller] = UseSeller(user?.email);
+    const [isAdmin] = UseAdmin(user?.email);
+    // console.log(isAdmin);
+    // console.log(isSeller);
 
     return (
         <div>
@@ -21,10 +29,12 @@ const ProductsCard = ({ pro }) => {
                     <p className='text-xl'>{timePosted}</p>
                     <div className="card-actions justify-end">
 
-                        <label
-                            htmlFor="bookingModal"
-                            onClick={() => setProduct(pro)}
-                            className='btn btn-info text-white'>Book Now</label>
+                       { !isSeller && !isAdmin &&
+                         <label
+                         htmlFor="bookingModal"
+                         onClick={() => setProduct(pro)}
+                         className='btn btn-info text-white'>Book Now</label>
+                       }
                     </div>
                 </div>
             </div>

@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 const BookingModal = ({ product, setProduct }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
 
     const handleBookedProduct = data => {
@@ -33,6 +35,7 @@ const BookingModal = ({ product, setProduct }) => {
                 if(data.acknowledged){
                     setProduct('');
                     toast.success('Booked product successfully');
+                    navigate('/dashboard/myOrders');
                 }
             })
     }

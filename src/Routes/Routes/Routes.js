@@ -4,6 +4,8 @@ import ErrorPage from "../../components/ErrorPage/ErrorPage";
 import Home from "../../components/Home/Home/Home";
 import CategoriesProducts from "../../components/Sheared/CategoriesProducts/CategoriesProducts";
 import AddProduct from "../../components/Sheared/Dasboard/AddProduct/AddProduct";
+import AllBuyers from "../../components/Sheared/Dasboard/AdminShow/AllBuyers";
+import AllSellers from "../../components/Sheared/Dasboard/AdminShow/AllSellers";
 import MyOrders from "../../components/Sheared/Dasboard/MyOrders/MyOrders";
 import MyProducts from "../../components/Sheared/Dasboard/MyProducts/MyProducts";
 import WelcomeDashboard from "../../components/Sheared/Dasboard/WelcomeDashboard/WelcomeDashboard";
@@ -31,8 +33,8 @@ export const routes = createBrowserRouter([
                 element: <Login></Login>
             },
             {
-                path: '/categories/:id',
-                loader: ({params})=> fetch(`http://localhost:5000/categories/${params.id}`),
+                path: '/products/:cateName',
+                loader: ({params})=> fetch(`http://localhost:5000/products/${params.cateName}`),
                 element: <CategoriesProducts></CategoriesProducts>
             },
             {
@@ -62,6 +64,14 @@ export const routes = createBrowserRouter([
             {
                 path: '/dashboard/myProducts',
                 element: <MyProducts></MyProducts>
+            },
+            {
+                path: '/dashboard/allSellers',
+                element: <AllSellers></AllSellers>
+            },
+            {
+                path: '/dashboard/allBuyers',
+                element: <AllBuyers></AllBuyers>
             },
         ]
         

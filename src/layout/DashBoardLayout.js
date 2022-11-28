@@ -22,45 +22,55 @@ const DashBoardLayout = () => {
             <div className="drawer drawer-mobile">
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
-                    {/* <!-- Page content here --> */}
+
                     <Outlet></Outlet>
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 text-base-content">
-                        {/* <!-- Sidebar content here --> */}
-                        {
-                            isSeller ?
-                                <>
-                                    {/* seller only  */}
-                                    <li
-                                        className='text-white  bg-gray-500  md:bg-gray-400 mb-2 rounded-lg'>
-                                        <Link to='/dashboard/addProduct'>Add A Product</Link>
-                                    </li>
-                                    <li
-                                        className='text-white  bg-gray-500 md:bg-gray-400 mb-2 rounded-lg'>
-                                        <Link to='/dashboard/myProducts'>My Products</Link>
 
-                                    </li>
-                                    <label htmlFor="dashboard-drawer" className="md:hidden btn btn-info text-base-content">Close drawer</label>
-                                </>
-                                :
+                        {/* buyers only  */}
+
+                        {
+                            !isSeller && !isAdmin &&
+                            <li
+                                className='text-white  bg-gray-500  md:bg-gray-400 mb-2 rounded-lg'>
+                                <Link to='/dashboard/myOrders'>My Orders</Link>
+                            </li>
+                        }
+
+                        {/* seller only  */}
+
+                        {
+                            isSeller &&
+                            <>
                                 <li
                                     className='text-white  bg-gray-500  md:bg-gray-400 mb-2 rounded-lg'>
-                                    <Link to='/dashboard/myOrders'>My Orders</Link>
-                                    {/* buyers only  */}
+                                    <Link to='/dashboard/addProduct'>Add A Product</Link>
                                 </li>
-                        }
-                        {
-                            isAdmin && <>
                                 <li
                                     className='text-white  bg-gray-500 md:bg-gray-400 mb-2 rounded-lg'>
                                     <Link to='/dashboard/myProducts'>My Products</Link>
 
                                 </li>
+                                <label htmlFor="dashboard-drawer" className="md:hidden btn btn-info text-base-content">Close drawer</label>
+                            </>
+
+
+                        }
+
+                        {/* admin only */}
+
+                        {
+                            isAdmin && <>
+                                <li
+                                    className='text-white  bg-gray-500 md:bg-gray-400 mb-2 rounded-lg'>
+                                    <Link to='/dashboard/allBuyers'>All Buyers</Link>
+
+                                </li>
                                 <li
                                     className='text-white  bg-gray-500  md:bg-gray-400 mb-2 rounded-lg'>
-                                    <Link to='/dashboard/addProduct'>Add A Product</Link>
+                                    <Link to='/dashboard/allSellers'>All Sellers</Link>
                                 </li>
 
                                 <label htmlFor="dashboard-drawer" className="md:hidden btn btn-info text-base-content">Close drawer</label>

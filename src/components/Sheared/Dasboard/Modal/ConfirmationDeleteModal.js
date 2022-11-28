@@ -9,7 +9,7 @@ const ConfirmationDeleteModal = ({ deleteProduct, closeModal, handleDeletingProd
             <div className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">Are you sure delete <span className='text-green-500'
-                    >{deleteProduct?.productName}</span> ?</h3>
+                    >{deleteProduct?.name}</span> ?</h3>
                     <p className="py-4">If you delete {deleteProduct?.productName} product .You Can click ok button or  cancel!! </p>
 
                     <div className="modal-action">

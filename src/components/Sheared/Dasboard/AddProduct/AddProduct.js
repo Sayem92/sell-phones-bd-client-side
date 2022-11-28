@@ -2,15 +2,13 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import UseAdmin from '../../../../api/UseAdmin';
 import UseSeller from '../../../../api/UseSeller';
 import { AuthContext } from '../../../../AuthProvider/AuthProvider';
 
-// seller && admin only ---------------------------
+// seller only ---------------------------
 const AddProduct = () => {
     const { user } = useContext(AuthContext);
     const [isSeller] = UseSeller(user?.email);
-    const [isAdmin] = UseAdmin(user?.email);
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -33,9 +31,9 @@ const AddProduct = () => {
 
 
                     const product = {
-                        productName: data.productName,
+                        name: data.productName,
                         categoryName: data.categoryName,
-                        image: imgData.data.display_url,
+                        img: imgData.data.display_url,
 
                         originalPrice: data.resalePrice,
                         resalePrice: data.resalePrice,
@@ -44,13 +42,14 @@ const AddProduct = () => {
                         usedYear: data.usedYear,
                         phone: data.phone,
                         location: data.location,
-
-                        description: data.description
+                        description: data.description,
+                        sellerEmail: user?.email,
+                        sellerName: user?.displayName,
+                        timePosted: user?.metadata?.creationTime.slice(4, 17)
 
 
                     }
 
-                    // console.log(product);
 
                     // sava information to the database----------
                     fetch(`http://localhost:5000/addProduct`, {
@@ -104,9 +103,19 @@ const AddProduct = () => {
                     <div className="form-control w-full max-w-x">
                         <label className="label"> <span className="label-text ">Category Name</span>
                         </label>
-                        <input type="text" {...register('categoryName', {
-                            required: "Please enter category name"
-                        })} className="input input-sm input-bordered  w-full max-w-xs" placeholder="category name" />
+
+                        <select {...register('categoryName', {
+                            required: "Please select category name"
+                        })}
+                            className="select select-sm border border-gray-300 w-full max-w-xs">
+
+                            <option disabled defaultValue >Chose category?</option>
+                            <option value='Oppo Phones'>Oppo Phones</option>
+                            <option value='Xiaomi Phones'>Xiaomi Phones</option>
+                            <option value='Realme Phones'>Realme Phones</option>
+                            <option value='Vivo Phones'>Vivo Phones</option>
+                            <option value='Samsung Phones'>Samsung Phones</option>
+                        </select>
 
                         {errors.categoryName && <p className='text-red-600'>{errors.categoryName.message}</p>}
                     </div>
@@ -189,10 +198,10 @@ const AddProduct = () => {
 
 
                     {
-                        (isSeller || isAdmin) &&
+                        isSeller &&
                         <input className='mt-3 btn btn-accent text-white w-full' type="submit" value='Submit' />
                     }
-                        
+
                 </form>
             </div>
         </div>
