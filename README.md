@@ -1,10 +1,48 @@
-# Getting Started with Create React App
+# App Name 
+📱📱 Sell Phones BD 📱📱
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Live Site Client
+[https://sell-phones-bd.web.app/]
+
+## Code Link Client
+[https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-Sayem92]
+
+## Code Link Server
+[https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-Sayem92]
+
+
+## key features
+✔ Easy to use. 
+✔ Buy any available phones.
+✔ Choose your buyer or seller account.
+✔ Pay amount easily.
+✔ Sellers can add product for sells or added product delete.
+✔ No hassels of loading. 
+✔ Save bandwidth.
+
+
+
+## Dependency used in this project
+1. [tailwind css library](https://tailwindcss.com/docs/installation).
+2. [Mamba UI](https://www.mambaui.com/components).
+3. [Kitwind  Kometa UI](https://kitwind.io/products/kometa/components/).
+4. [Daisy ui](https://daisyui.com/).
+5. [Create React App](https://github.com/facebook/create-react-app).
+6. [React Router Dom](https://reactrouter.com/en/main).
+7. [Firebase](https://firebase.google.com/).
+8. [React-hot-toast](https://react-hot-toast.com/).
+9. [React icon](https://react-icons.github.io/react-icons/).
+10. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+
+## First time check and set
+
+In the project you will clone, you can run:
+
+1. First time npm install.
+2. You can set firebase config or api key. 
 
 ## Available Scripts
-
-In the project directory, you can run:
 
 ### `npm start`
 
