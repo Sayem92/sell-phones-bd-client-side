@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 import Loading from '../../../../Loading/Loading';
 
 const AllBuyers = () => {
@@ -21,7 +22,31 @@ const AllBuyers = () => {
         })
 
         
-        
+
+        const handleDeletingProduct = _id => {
+
+            const agree = window.confirm('Are you sure delete this buyer !!!')
+
+            if(agree){
+                // console.log(_id);
+                fetch(`http://localhost:5000/users/delete/${_id}`, {
+                method: "DELETE"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        toast.success(`Buyer deleted successfully`)
+                        refetch();
+                    }
+
+                })
+
+            }
+
+            
+        };
+
+
 
         if(isLoading){
             return <Loading></Loading>
@@ -33,6 +58,8 @@ const AllBuyers = () => {
             </h1>
         </div>
         }
+
+        
 
     return (
         <div className='mt-3'>
@@ -46,7 +73,6 @@ const AllBuyers = () => {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Delete</th>
-                            {/* <th>Make Admin</th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -67,16 +93,9 @@ const AllBuyers = () => {
                                 <td>{buyer.email}</td>
                                 <td>
                                     <label
-                                        // onClick={() => setDeleteProduct(product)}
-                                        htmlFor="seller-con-dele-modal"
+                                        onClick={() => handleDeletingProduct(buyer._id)}
                                         className="btn btn-sm btn-error text-white">Delete</label>
                                 </td>
-                                {/* <td>
-                                    <label
-
-                                        className="btn btn-sm btn-info text-white">Make Admin</label>
-
-                                </td> */}
                             </tr>)
                         }
 
