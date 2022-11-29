@@ -21,57 +21,57 @@ const MyProducts = () => {
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: [''],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myProduct/${user?.email}`)
+            const res = await fetch(`https://assignment-12-server-eosin.vercel.app/myProduct/${user?.email}`)
             const data = await res.json()
             return data;
         }
     });
 
-   
 
-        const handleDeletingProduct = _id => {
 
-            fetch(`http://localhost:5000/product/${_id}`, {
-                method: "DELETE"
+    const handleDeletingProduct = _id => {
+
+        fetch(`https://assignment-12-server-eosin.vercel.app/product/${_id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    toast.success(`Products deleted successfully`)
+                    refetch();
+                }
+
+            })
+    };
+
+
+    // product taki and advertise taki delete---------
+    const handleAdvertise = product => {
+
+        const agree = window.confirm(`Are you sure advertise ${product?.name} product`);
+
+        if (agree) {
+
+            const advertisePro = {
+                ...product,
+                proId: product._id
+            }
+            fetch(`https://assignment-12-server-eosin.vercel.app/advertise/${product?._id}`, {
+                method: "PUT",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(advertisePro)
             })
                 .then(res => res.json())
                 .then(data => {
-                    if (data.deletedCount > 0) {
-                        toast.success(`Products deleted successfully`)
-                        refetch();
-                    }
+                    console.log(data);
+                    toast.success('advertise product successful')
 
                 })
-        };
+        }
 
-
-        // product taki and advertise taki delete---------
-        const handleAdvertise = product => {
-            
-            const agree = window.confirm(`Are you sure advertise ${product?.name} product`);
-
-            if(agree){
-
-               const advertisePro = {
-                ...product,
-                proId :product._id
-               }
-                fetch(`http://localhost:5000/advertise/${product?._id}`, {
-                    method: "PUT",
-                    headers:{
-                        'content-type': 'application/json'
-                    },
-                    body:JSON.stringify(advertisePro)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data);
-                        toast.success('advertise product successful')
-    
-                    })
-            }
-           
-        };
+    };
 
 
 
@@ -84,9 +84,9 @@ const MyProducts = () => {
 
     if (!products.length) {
         return <div className='p-4 mt-6'>
-            <h1 className='text-3xl text-yellow-500'>No Product Added!. 
-            <span className='text-blue-500 underline'
-            ><Link to='/dashboard/addProduct'> Please add any product</Link></span>
+            <h1 className='text-3xl text-yellow-500'>No Product Added!.
+                <span className='text-blue-500 underline'
+                ><Link to='/dashboard/addProduct'> Please add any product</Link></span>
             </h1>
         </div>
     };
@@ -116,15 +116,15 @@ const MyProducts = () => {
                                 <td>{product.name}</td>
                                 <td>
                                     {
-                                        product?.sold && 
+                                        product?.sold &&
                                         <label
-                                        className="btn btn-sm btn-success text-white">Sold</label>
+                                            className="btn btn-sm btn-success text-white">Sold</label>
 
                                     }
                                     {
-                                        !product?.sold && 
+                                        !product?.sold &&
                                         <label
-                                        className="btn btn-sm btn-success text-white">Available</label>
+                                            className="btn btn-sm btn-success text-white">Available</label>
 
                                     }
                                 </td>
@@ -137,12 +137,12 @@ const MyProducts = () => {
                                 </td>
                                 <td>
 
-                                   {
-                                    !product?.sold &&
-                                    <label
-                                    onClick={()=>handleAdvertise(product)}
-                                    className="btn btn-sm btn-info text-white">Advertise</label>
-                                   }
+                                    {
+                                        !product?.sold &&
+                                        <label
+                                            onClick={() => handleAdvertise(product)}
+                                            className="btn btn-sm btn-info text-white">Advertise</label>
+                                    }
 
                                 </td>
                             </tr>)

@@ -52,7 +52,7 @@ const AddProduct = () => {
 
 
                     // sava information to the database----------
-                    fetch(`http://localhost:5000/addProduct`, {
+                    fetch(`https://assignment-12-server-eosin.vercel.app/addProduct`, {
                         method: "POST",
                         headers: {
                             'content-type': "application/json"

@@ -21,7 +21,7 @@ export const routes = createBrowserRouter([
         path: '/',
         element: <Main></Main>,
         errorElement: <ErrorPage></ErrorPage>,
-        children:[
+        children: [
             {
                 path: '/',
                 element: <Home></Home>
@@ -40,7 +40,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/products/:cateName',
-                loader: ({params})=> fetch(`http://localhost:5000/products/${params.cateName}`),
+                loader: ({ params }) => fetch(`https://assignment-12-server-eosin.vercel.app/products/${params.cateName}`),
                 element: <PrivateRoutes>
                     <CategoriesProducts></CategoriesProducts></PrivateRoutes>
             },
@@ -53,9 +53,9 @@ export const routes = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element:  <DashBoardLayout />,
+        element: <DashBoardLayout />,
         errorElement: <ErrorPage></ErrorPage>,
-        children:[
+        children: [
             {
                 path: '/dashboard',
                 element: <WelcomeDashboard></WelcomeDashboard>
@@ -83,10 +83,10 @@ export const routes = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
-                loader: ({ params }) => fetch(`http://localhost:5000/bookingData/${params.id}`)
+                loader: ({ params }) => fetch(`https://assignment-12-server-eosin.vercel.app/bookingData/${params.id}`)
             },
         ]
-        
+
     }
 
 ])

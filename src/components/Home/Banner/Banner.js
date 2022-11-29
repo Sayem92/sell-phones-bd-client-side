@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const Banner = () => {
     return (
@@ -16,10 +15,7 @@ const Banner = () => {
                     <p className="mt-6 mb-8 text-lg sm:mb-12">Sell phones BD most trusted platform to sell old Mobile Phone, sell your used Mobile Phone and get instant cash at your account.
 
                     </p>
-                    <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
-                        <Link href="/" className="px-8 py-3 text-lg font-semibold rounded bg-info text-white">Get Started</Link>
-                     
-                    </div>
+                    
                 </div>
             </div>
         </section>

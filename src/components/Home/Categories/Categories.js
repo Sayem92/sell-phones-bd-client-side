@@ -8,21 +8,21 @@ import Category from './Category';
 
 const Categories = () => {
     const [categories, setCategory] = useState([]);
-    const [loading , setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
         setLoading(true)
-        axios.get('http://localhost:5000/categories')
-        .then(data =>{
-             setCategory(data.data)
-             setLoading(false)
-        })
-    },[])
+        axios.get('https://assignment-12-server-eosin.vercel.app/categories')
+            .then(data => {
+                setCategory(data.data)
+                setLoading(false)
+            })
+    }, [])
 
-  if(loading){
-    return  <Loading></Loading>
-  }
+    if (loading) {
+        return <Loading></Loading>
+    }
 
     return (
         <div className='py-20'>

@@ -8,7 +8,7 @@ export const userInfoSave = (name, email, seller, photoURL) => {
         photoURL,
     }
 
-    fetch(`http://localhost:5000/users`, {
+    fetch(`https://assignment-12-server-eosin.vercel.app/users`, {
         method: "PUT",
         headers: {
             'content-type': "application/json"

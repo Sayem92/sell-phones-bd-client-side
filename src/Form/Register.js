@@ -13,7 +13,7 @@ const Register = () => {
     const [signUpError, setSignUpError] = useState('');
     const imageHostKey = process.env.REACT_APP_IMGBB_key;
     // const navigate = useNavigate();
-    
+
     const [createUserEmail, setCreateUserEmail] = useState('');
     const [token] = UseToken(createUserEmail);
 
@@ -80,7 +80,7 @@ const Register = () => {
             userPhoto: photoURL
         }
 
-        fetch(`http://localhost:5000/users`, {
+        fetch(`https://assignment-12-server-eosin.vercel.app/users`, {
             method: "PUT",
             headers: {
                 'content-type': "application/json"

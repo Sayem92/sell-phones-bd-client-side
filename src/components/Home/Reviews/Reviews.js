@@ -10,7 +10,7 @@ const Reviews = () => {
         queryFn: async () => {
             try {
 
-                const res = await fetch(`http://localhost:5000/reviews`)
+                const res = await fetch(`https://assignment-12-server-eosin.vercel.app/reviews`)
                 const data = await res.json();
                 return data;
 
@@ -21,7 +21,7 @@ const Reviews = () => {
         }
     })
 
-    if(isLoading){
+    if (isLoading) {
         return <Loading></Loading>
     }
 

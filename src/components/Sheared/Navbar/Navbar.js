@@ -42,9 +42,9 @@ const Navbar = () => {
                     className="inline-flex items-center"
                 >
 
-                    <img className='w-1 h-1 md:w-14 md:h-14 rounded-lg invisible md:visible' src={logo} alt="sell phone bd" />
+                    <img className='w-0 h-0 md:w-14 md:h-14 rounded-lg invisible md:visible' src={logo} alt="sell phone bd" />
 
-                    <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
+                    <span className="ml-2 text-xl font-bold tracking-wide text-green-400 uppercase">
                         Sell Phones BD
                     </span>
                 </NavLink>

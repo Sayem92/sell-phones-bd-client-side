@@ -12,29 +12,29 @@ const BookingModal = ({ product, setProduct }) => {
 
     const handleBookedProduct = data => {
 
-            const bookedData={
-                userName: user?.displayName,
-                email: user?.email,
-                categoryName: product?.categoryName,
-                productName: product?.name,
-                productImage : product.img,
-                productPrice: product?.resalePrice,
-                phone: data.phone,
-                meetingLocation : data.meetingLocation,
-                productId: product?._id
-            }
+        const bookedData = {
+            userName: user?.displayName,
+            email: user?.email,
+            categoryName: product?.categoryName,
+            productName: product?.name,
+            productImage: product.img,
+            productPrice: product?.resalePrice,
+            phone: data.phone,
+            meetingLocation: data.meetingLocation,
+            productId: product?._id
+        }
 
-            // booked collection a save--------
-            fetch(`http://localhost:5000/bookedProduct`,{
-                method: "POST",
-                headers: {
-                    "content-type": "application/json"
-                },
-                body:JSON.stringify(bookedData)
-            })
+        // booked collection a save--------
+        fetch(`https://assignment-12-server-eosin.vercel.app/bookedProduct`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(bookedData)
+        })
             .then(res => res.json())
-            .then(data =>{
-                if(data.acknowledged){
+            .then(data => {
+                if (data.acknowledged) {
                     setProduct('');
                     toast.success('Booked product successfully');
                     navigate('/dashboard/myOrders');

@@ -4,32 +4,36 @@ import toast from 'react-hot-toast';
 import Loading from '../../../../Loading/Loading';
 
 const AllBuyers = () => {
- 
-        const { data: buyers = [], isLoading, refetch } = useQuery({
-            queryKey: [''],
-            queryFn: async () => {
-                try {
-    
-                    const res = await fetch(`http://localhost:5000/allBuyers`)
-                    const data = await res.json();
-                    return data;
-    
-                }
-                catch (err) {
-                    console.log(err);
-                }
+
+    const { data: buyers = [], isLoading, refetch } = useQuery({
+        queryKey: [''],
+        queryFn: async () => {
+            try {
+
+                const res = await fetch(`https://assignment-12-server-eosin.vercel.app/allBuyers`, {
+                    headers: {
+                        authorization: `bearer ${localStorage.getItem('phoneToken')}`
+                    }
+                })
+                const data = await res.json();
+                return data;
+
             }
-        })
+            catch (err) {
+                console.log(err);
+            }
+        }
+    })
 
-        
 
-        const handleDeletingBuyer = _id => {
 
-            const agree = window.confirm('Are you sure delete this buyer !!!')
+    const handleDeletingBuyer = _id => {
 
-            if(agree){
-                // console.log(_id);
-                fetch(`http://localhost:5000/users/delete/${_id}`, {
+        const agree = window.confirm('Are you sure delete this buyer !!!')
+
+        if (agree) {
+            // console.log(_id);
+            fetch(`https://assignment-12-server-eosin.vercel.app/users/delete/${_id}`, {
                 method: "DELETE"
             })
                 .then(res => res.json())
@@ -41,23 +45,23 @@ const AllBuyers = () => {
 
                 })
 
-            }
-
-            
-        };
-
-
-
-        if(isLoading){
-            return <Loading></Loading>
         }
 
-        if (!buyers.length) {
-            return <div className='p-4 mt-6'>
+
+    };
+
+
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+
+    if (!buyers.length) {
+        return <div className='p-4 mt-6'>
             <h1 className='text-3xl text-yellow-500'>No Buyers available.
             </h1>
         </div>
-        }
+    }
 
 
 
@@ -78,25 +82,25 @@ const AllBuyers = () => {
                     <tbody>
 
                         {
-                            buyers.map((buyer, i)=>
-                            <tr key={buyer._id}>
-                                <th>{i + 1}</th>
-                                <td>
-                                    <div className="avatar">
-                                        <div className="w-24 rounded-lg">
-                                            <img src={buyer.userPhoto} alt='' />
+                            buyers.map((buyer, i) =>
+                                <tr key={buyer._id}>
+                                    <th>{i + 1}</th>
+                                    <td>
+                                        <div className="avatar">
+                                            <div className="w-24 rounded-lg">
+                                                <img src={buyer.userPhoto} alt='' />
+                                            </div>
                                         </div>
-                                    </div>
 
-                                </td>
-                                <td>{buyer.name}</td>
-                                <td>{buyer.email}</td>
-                                <td>
-                                    <label
-                                        onClick={() => handleDeletingBuyer(buyer._id)}
-                                        className="btn btn-sm btn-error text-white">Delete</label>
-                                </td>
-                            </tr>)
+                                    </td>
+                                    <td>{buyer.name}</td>
+                                    <td>{buyer.email}</td>
+                                    <td>
+                                        <label
+                                            onClick={() => handleDeletingBuyer(buyer._id)}
+                                            className="btn btn-sm btn-error text-white">Delete</label>
+                                    </td>
+                                </tr>)
                         }
 
                     </tbody>

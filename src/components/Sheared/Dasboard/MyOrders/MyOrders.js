@@ -9,12 +9,12 @@ const MyOrders = () => {
     //    console.log(user.email);
 
 
-    const { data: booked = [], isLoading} = useQuery({
+    const { data: booked = [], isLoading } = useQuery({
         queryKey: [''],
         queryFn: async () => {
             try {
 
-                const res = await fetch(`http://localhost:5000/bookedProduct/${user?.email}`, {
+                const res = await fetch(`https://assignment-12-server-eosin.vercel.app/bookedProduct/${user?.email}`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('phoneToken')}`
                     }
@@ -76,7 +76,7 @@ const MyOrders = () => {
                                 <td>
 
                                     {!booked?.paid &&
-                                       
+
                                         <Link to={`/dashboard/payment/${booked._id}`}>
                                             <button
                                                 className='btn btn-sm btn-info text-white'
@@ -86,9 +86,9 @@ const MyOrders = () => {
                                     {
                                         booked?.paid &&
                                         <button
-                                        className='btn btn-sm btn-success text-white'
-                                    >Paid</button>
-                                    
+                                            className='btn btn-sm btn-success text-white'
+                                        >Paid</button>
+
                                     }
                                 </td>
                             </tr>
