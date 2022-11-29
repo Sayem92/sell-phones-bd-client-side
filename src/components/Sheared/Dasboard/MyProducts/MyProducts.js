@@ -44,6 +44,38 @@ const MyProducts = () => {
                 })
         };
 
+
+        // product taki and advertise taki delete---------
+        const handleAdvertise = product => {
+            
+            const agree = window.confirm(`Are you sure advertise ${product?.name} product`);
+
+            if(agree){
+
+               const advertisePro = {
+                ...product,
+                proId :product._id
+               }
+                fetch(`http://localhost:5000/advertise/${product?._id}`, {
+                    method: "PUT",
+                    headers:{
+                        'content-type': 'application/json'
+                    },
+                    body:JSON.stringify(advertisePro)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        toast.success('advertise product successful')
+    
+                    })
+            }
+           
+        };
+
+
+
+
     // console.log(products);
 
     if (isLoading) {
@@ -108,6 +140,7 @@ const MyProducts = () => {
                                    {
                                     !product?.sold &&
                                     <label
+                                    onClick={()=>handleAdvertise(product)}
                                     className="btn btn-sm btn-info text-white">Advertise</label>
                                    }
 
