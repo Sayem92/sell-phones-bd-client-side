@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/sell.png'
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
+import { FcDownRight, IconName } from "react-icons/fc";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
@@ -20,56 +21,76 @@ const Navbar = () => {
     }
 
 
+    let activeStyle = {
+        textDecoration: "underline",
+        color: 'blue'
+    };
+
     return (
         <div className="px-4 py-5 mx-auto md:px-24 bg-slate-200">
             <div className="relative flex items-center justify-between">
-                <Link
+           {
+            user?.email &&
+            <label htmlFor="dashboard-drawer" className="md:hidden text-base-content ">
+                <FcDownRight className='w-10'/>
+                </label>
+           }
+                <NavLink
                     to="/"
                     aria-label="Sell Phones BD"
                     title="Sell Phones BD"
                     className="inline-flex items-center"
                 >
 
-                    <img className='w-14 h-14 rounded-lg' src={logo} alt="sell phone bd" />
+                    <img className='w-1 h-1 md:w-14 md:h-14 rounded-lg invisible md:visible' src={logo} alt="sell phone bd" />
 
                     <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
                         Sell Phones BD
                     </span>
-                </Link>
+                </NavLink>
                 <ul className="flex items-center hidden space-x-8 lg:flex">
 
                     <li>
-                        <Link
+                        <NavLink
+                         style={({ isActive }) =>
+                         isActive ? activeStyle : undefined
+                       }
                             to="/home"
                             aria-label="home"
                             title="home"
                             className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                             Home
-                        </Link>
+                        </NavLink>
                     </li>
                     {
                         user?.uid &&
                         <li>
-                            <Link
+                            <NavLink
+                             style={({ isActive }) =>
+                             isActive ? activeStyle : undefined
+                           }
                                 to="/dashboard"
                                 aria-label="dashboard"
                                 title="dashboard"
                                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                             >
                                 Dashboard
-                            </Link>
+                            </NavLink>
                         </li>
                     }
                     <li>
-                        <Link
+                        <NavLink
+                         style={({ isActive }) =>
+                         isActive ? activeStyle : undefined
+                       }
                             to="/blog"
                             aria-label="blog"
                             title="blog"
                             className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                             Blog
-                        </Link>
+                        </NavLink>
                     </li>
 
                 </ul>
@@ -81,9 +102,9 @@ const Navbar = () => {
                                     className='btn bg-sky-400 hover:bg-sky-500 border-none text-white rounded-3xl'>Log out</button>
                                 :
 
-                                <Link to='/login'>
+                                <NavLink to='/login'>
                                     <button className='btn btn-info text-white rounded-3xl'>Login</button>
-                                </Link>
+                                </NavLink>
 
                         }
 
@@ -116,7 +137,7 @@ const Navbar = () => {
                             <div className="p-5 bg-white border rounded shadow-sm">
                                 <div className="flex items-center justify-between mb-4">
                                     <div>
-                                        <Link
+                                        <NavLink
                                             to="/"
                                             aria-label="Sell Phones BD"
                                             title="Sell Phones BD"
@@ -128,7 +149,7 @@ const Navbar = () => {
                                             <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
                                                 Sell Phones BD
                                             </span>
-                                        </Link>
+                                        </NavLink>
                                     </div>
                                     <div>
                                         <button
@@ -149,37 +170,45 @@ const Navbar = () => {
                                 <nav>
                                     <ul className="space-y-4">
                                         <li>
-                                            <Link
+                                            <NavLink
+                                             style={({ isActive }) =>
+                                             isActive ? activeStyle : undefined
+                                           }
                                                 to="/home"
                                                 aria-label="home"
                                                 title="home"
                                                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                             >
                                                 Home
-                                            </Link>
+                                            </NavLink>
                                         </li>
                                         {
                                             user?.uid &&
                                             <li>
-                                                <Link
+                                                <NavLink
+                                                 style={({ isActive }) =>
+                                                 isActive ? activeStyle : undefined
+                                               }
                                                     to="/dashboard"
                                                     aria-label="dashboard"
                                                     title="dashboard"
                                                     className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                                 >
                                                     Dashboard
-                                                </Link>
+                                                </NavLink>
                                             </li>
                                         }
                                         <li>
-                                            <Link
+                                            <NavLink
+                                                style={({ isActive }) =>
+                                                    isActive ? activeStyle : undefined}
                                                 to="/blog"
                                                 aria-label="blog"
                                                 title="blog"
                                                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                             >
                                                 Blog
-                                            </Link>
+                                            </NavLink>
                                         </li>
                                         <li>
                                             {
@@ -187,9 +216,9 @@ const Navbar = () => {
                                                     <button onClick={handleLogout}
                                                         className='btn bg-sky-400 hover:bg-sky-500 border-none text-white rounded-3xl'>Log out</button>
                                                     :
-                                                    <Link to='/login'>
+                                                    <NavLink to='/login'>
                                                         <button className='btn btn-info text-white rounded-3xl'>Login</button>
-                                                    </Link>
+                                                    </NavLink>
 
                                             }
                                         </li>

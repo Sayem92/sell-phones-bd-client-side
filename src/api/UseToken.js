@@ -9,7 +9,7 @@ export const UseToken = (email) => {
             fetch(`http://localhost:5000/jwt?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
-                    console.log("token", data);
+                    console.log("get token");
                     if (data.accessToken) {
                         localStorage.setItem('phoneToken', data.accessToken)
                         setToken(data.accessToken)
