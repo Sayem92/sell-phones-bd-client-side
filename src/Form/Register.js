@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { userInfoSave } from '../api/User';
+import { UseToken } from '../api/UseToken';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import Loading from '../Loading/Loading';
 
@@ -11,8 +12,16 @@ const Register = () => {
     const { createUser, updateUser, googleLogin, loading, setLoading } = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
     const imageHostKey = process.env.REACT_APP_IMGBB_key;
+    // const navigate = useNavigate();
+    
+    const [createUserEmail, setCreateUserEmail] = useState('');
+    const [token] = UseToken(createUserEmail);
 
     const navigate = useNavigate();
+    if (token) {
+        navigate('/');
+    }
+
 
     // user signup---------
     const handleSignUp = data => {
@@ -83,7 +92,9 @@ const Register = () => {
                 console.log("save user", data);
                 toast.success('Save user data!');
                 setLoading(false);
-                navigate('/')
+                // navigate('/')
+                setCreateUserEmail(email); // set for token-----
+
             })
 
     };
@@ -100,7 +111,9 @@ const Register = () => {
                 // user data save --------------
                 userInfoSave(user?.displayName, user?.email, false, user?.photoURL)
                 toast.success('Google Login Successfully!');
-                navigate('/')
+                // navigate('/')
+                setCreateUserEmail(user?.email); // set for token-----
+
 
             })
             .catch(err => console.log(err))

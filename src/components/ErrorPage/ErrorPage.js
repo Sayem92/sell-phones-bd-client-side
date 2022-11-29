@@ -1,8 +1,23 @@
-import React from 'react';
-import { Link, useRouteError } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useNavigate, useRouteError } from 'react-router-dom';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const ErrorPage = () => {
     const error = useRouteError();
+    const { logOut } = useContext(AuthContext)
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logOut()
+            .then(() => {
+                localStorage.removeItem('phoneToken')
+                navigate('/')
+            })
+            .then(err => console.log(err))
+    }
+
+
     return (
         <div>
             <section className="flex items-center h-full sm:p-16 bg-gray-900 text-gray-100">
@@ -15,9 +30,10 @@ const ErrorPage = () => {
                     </svg>
                     <p className="text-3xl">Something went wrong!!!</p>
                     <p className='text-3xl text-red-500'>
-                    {error?.status} {error?.statusText}
-                </p>
-                    <Link to="/" className="px-8 py-3 font-semibold rounded bg-sky-400 text-gray-900">Back to homepage</Link>
+                        {error?.status} {error?.statusText}
+                    </p>
+                    <button onClick={handleLogout}
+                        className="px-8 py-3 font-semibold rounded bg-sky-400 text-gray-900">Back to homepage</button>
                 </div>
             </section>
         </div>

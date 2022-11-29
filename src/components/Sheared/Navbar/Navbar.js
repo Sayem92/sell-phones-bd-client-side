@@ -13,7 +13,7 @@ const Navbar = () => {
     const handleLogout = () => {
         logOut()
             .then(() => {
-                // kaj ace ---------
+                localStorage.removeItem('phoneToken')
                 navigate('/')
             })
             .then(err => console.log(err))

@@ -9,12 +9,16 @@ const MyOrders = () => {
     //    console.log(user.email);
 
 
-    const { data: booked = [], isLoading, refetch } = useQuery({
+    const { data: booked = [], isLoading} = useQuery({
         queryKey: [''],
         queryFn: async () => {
             try {
 
-                const res = await fetch(`http://localhost:5000/bookedProduct/${user?.email}`)
+                const res = await fetch(`http://localhost:5000/bookedProduct/${user?.email}`, {
+                    headers: {
+                        authorization: `bearer ${localStorage.getItem('phoneToken')}`
+                    }
+                })
                 const data = await res.json();
                 return data;
 
