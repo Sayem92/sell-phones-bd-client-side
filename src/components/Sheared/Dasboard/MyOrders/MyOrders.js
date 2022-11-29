@@ -6,11 +6,11 @@ import Loading from '../../../../Loading/Loading';
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
-//    console.log(user.email);
+    //    console.log(user.email);
 
 
     const { data: booked = [], isLoading, refetch } = useQuery({
-        queryKey: ['doctors'],
+        queryKey: [''],
         queryFn: async () => {
             try {
 
@@ -26,7 +26,7 @@ const MyOrders = () => {
     })
 
 
-
+    // console.log(booked);
 
     if (isLoading) {
         return <Loading></Loading>
@@ -34,11 +34,11 @@ const MyOrders = () => {
 
     if (!booked.length) {
         return <div className='p-4 mt-6'>
-        <h1 className='text-3xl text-yellow-500'>No Product Booked!. 
-        <span className='text-blue-500 underline'
-        ><Link to='/'> Please booked any product</Link></span>
-        </h1>
-    </div>
+            <h1 className='text-3xl text-yellow-500'>No Product Booked!.
+                <span className='text-blue-500 underline'
+                ><Link to='/'> Please booked any product</Link></span>
+            </h1>
+        </div>
     }
 
     return (
@@ -70,10 +70,22 @@ const MyOrders = () => {
                                 <td>{booked.productName}</td>
                                 <td>{booked.productPrice}</td>
                                 <td>
-                                    <label
 
-                                        htmlFor="seller-con-dele-modal"
-                                        className="btn btn-sm btn-info text-white">Pay</label>
+                                    {!booked?.paid &&
+                                       
+                                        <Link to={`/dashboard/payment/${booked._id}`}>
+                                            <button
+                                                className='btn btn-sm btn-info text-white'
+                                            >Pay</button>
+                                        </Link>
+                                    }
+                                    {
+                                        booked?.paid &&
+                                        <button
+                                        className='btn btn-sm btn-success text-white'
+                                    >Paid</button>
+                                    
+                                    }
                                 </td>
                             </tr>
                             )}

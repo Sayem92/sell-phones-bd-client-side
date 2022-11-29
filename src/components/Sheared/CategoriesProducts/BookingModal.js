@@ -21,8 +21,10 @@ const BookingModal = ({ product, setProduct }) => {
                 productPrice: product?.resalePrice,
                 phone: data.phone,
                 meetingLocation : data.meetingLocation,
+                productId: product?._id
             }
 
+            // booked collection a save--------
             fetch(`http://localhost:5000/bookedProduct`,{
                 method: "POST",
                 headers: {

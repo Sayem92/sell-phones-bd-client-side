@@ -12,8 +12,10 @@ const ProductsCard = ({ pro }) => {
     const [isAdmin] = UseAdmin(user?.email);
     // console.log(isAdmin);
     // console.log(isSeller);
+    // console.log(pro);
 
     return (
+       
         <div>
             <div className="card card-compact md:w-full bg-base-100 shadow-xl">
                 <figure>
@@ -29,7 +31,7 @@ const ProductsCard = ({ pro }) => {
                     <p className='text-xl'>{timePosted}</p>
                     <div className="card-actions justify-end">
 
-                       { !isSeller && !isAdmin &&
+                       { !isSeller && !isAdmin && 
                          <label
                          htmlFor="bookingModal"
                          onClick={() => setProduct(pro)}
@@ -46,6 +48,7 @@ const ProductsCard = ({ pro }) => {
                 ></BookingModal>
             }
         </div>
+       
     );
 };
 

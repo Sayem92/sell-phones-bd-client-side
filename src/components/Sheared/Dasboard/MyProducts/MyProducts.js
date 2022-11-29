@@ -82,7 +82,20 @@ const MyProducts = () => {
                             products?.map((product, i) => <tr key={product._id}>
                                 <th>{i + 1}</th>
                                 <td>{product.name}</td>
-                                <td>sold / unsold</td>
+                                <td>
+                                    {
+                                        product?.sold && 
+                                        <label
+                                        className="btn btn-sm btn-success text-white">Sold</label>
+
+                                    }
+                                    {
+                                        !product?.sold && 
+                                        <label
+                                        className="btn btn-sm btn-success text-white">Available</label>
+
+                                    }
+                                </td>
                                 <td>{product.resalePrice}</td>
                                 <td>
                                     <label
@@ -91,9 +104,12 @@ const MyProducts = () => {
                                         className="btn btn-sm btn-error text-white">Delete</label>
                                 </td>
                                 <td>
-                                    <label
 
-                                        className="btn btn-sm btn-info text-white">Advertise</label>
+                                   {
+                                    !product?.sold &&
+                                    <label
+                                    className="btn btn-sm btn-info text-white">Advertise</label>
+                                   }
 
                                 </td>
                             </tr>)

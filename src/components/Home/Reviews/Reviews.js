@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import Loading from '../../../Loading/Loading';
 import ReviewCard from './ReviewCard';
 
 const Reviews = () => {
 
-    const { data: reviews = [] } = useQuery({
+    const { data: reviews = [], isLoading } = useQuery({
         queryKey: [''],
         queryFn: async () => {
             try {
@@ -19,6 +20,10 @@ const Reviews = () => {
             }
         }
     })
+
+    if(isLoading){
+        return <Loading></Loading>
+    }
 
     return (
         <div className='p-2 md:px-20 mb-20 '>

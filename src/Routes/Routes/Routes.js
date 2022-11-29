@@ -8,6 +8,7 @@ import AllBuyers from "../../components/Sheared/Dasboard/AdminShow/AllBuyers";
 import AllSellers from "../../components/Sheared/Dasboard/AdminShow/AllSellers";
 import MyOrders from "../../components/Sheared/Dasboard/MyOrders/MyOrders";
 import MyProducts from "../../components/Sheared/Dasboard/MyProducts/MyProducts";
+import Payment from "../../components/Sheared/Dasboard/Payment/Payment";
 import WelcomeDashboard from "../../components/Sheared/Dasboard/WelcomeDashboard/WelcomeDashboard";
 import Login from "../../Form/Login";
 import Register from "../../Form/Register";
@@ -78,6 +79,11 @@ export const routes = createBrowserRouter([
             {
                 path: '/dashboard/allBuyers',
                 element: <AllBuyers></AllBuyers>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <Payment></Payment>,
+                loader: ({ params }) => fetch(`http://localhost:5000/bookingData/${params.id}`)
             },
         ]
         
