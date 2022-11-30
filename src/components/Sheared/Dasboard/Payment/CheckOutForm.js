@@ -93,7 +93,7 @@ const CheckOutForm = ({ booked }) => {
 
             }
 
-            console.log("cccccc", payment);
+            console.log("payment", payment);
 
             // store payment info in the database
             fetch(`https://assignment-12-server-eosin.vercel.app/payments`, {

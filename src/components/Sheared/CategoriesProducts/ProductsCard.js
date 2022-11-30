@@ -1,4 +1,6 @@
 import { useContext, useState } from 'react';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 import UseAdmin from '../../../api/UseAdmin';
 import UseSeller from '../../../api/UseSeller';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
@@ -15,11 +17,19 @@ const ProductsCard = ({ pro }) => {
     // console.log(pro);
 
     return (
-       
+
         <div>
             <div className="card card-compact md:w-full bg-base-100 shadow-xl">
                 <figure>
-                    <img className='h-52 w-full' src={img} alt="Shoes" />
+                    <PhotoProvider
+                        speed={() => 800}
+                        easing={(type) => (type === 2 ? 'cubic-bezier(0.36, 0, 0.66, -0.56)' : 'cubic-bezier(0.34, 1.56, 0.64, 1)')}
+                    >
+                        <PhotoView src={img}>
+                            <img style={{ objectFit: 'cover' }}
+                                className='rounded-lg h-96 w-64' src={img} alt="phone" />
+                        </PhotoView>
+                    </PhotoProvider>
                 </figure>
                 <div className="card-body space-y-0">
                     <h2 className="card-title text-3xl">{name}</h2>
@@ -31,12 +41,12 @@ const ProductsCard = ({ pro }) => {
                     <p className='text-xl'>{timePosted}</p>
                     <div className="card-actions justify-end">
 
-                       { !isSeller && !isAdmin && 
-                         <label
-                         htmlFor="bookingModal"
-                         onClick={() => setProduct(pro)}
-                         className='btn btn-info text-white'>Book Now</label>
-                       }
+                        {!isSeller && !isAdmin &&
+                            <label
+                                htmlFor="bookingModal"
+                                onClick={() => setProduct(pro)}
+                                className='btn btn-info text-white'>Book Now</label>
+                        }
                     </div>
                 </div>
             </div>
@@ -48,7 +58,7 @@ const ProductsCard = ({ pro }) => {
                 ></BookingModal>
             }
         </div>
-       
+
     );
 };
 
