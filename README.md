@@ -5,10 +5,10 @@
 [https://sell-phones-bd.web.app/]
 
 ## Code Link Client
-[https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-Sayem92]
+[https://github.com/Sayem92/sell-phones-bd-client-side]
 
 ## Code Link Server
-[https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-Sayem92]
+[https://github.com/Sayem92/sell-phones-bd-server-side]
 
 
 ## key features
