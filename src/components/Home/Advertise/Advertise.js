@@ -21,7 +21,7 @@ const Advertise = () => {
     return (
         <div>
             <h1 className='p-2 text-4xl text-center text-blue-400 font-semibold'>Advertise Section</h1>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-5 p-2 pt-10 pb-28 md:px-72'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 p-2 pt-10 pb-28 md:px-16'>
 
                 {
                     products?.map(pro => <AdvertiseCard
