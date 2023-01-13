@@ -12,9 +12,6 @@ const ProductsCard = ({ pro }) => {
     const { user } = useContext(AuthContext);
     const [isSeller] = UseSeller(user?.email);
     const [isAdmin] = UseAdmin(user?.email);
-    // console.log(isAdmin);
-    // console.log(isSeller);
-    // console.log(pro);
 
     return (
 
@@ -33,12 +30,12 @@ const ProductsCard = ({ pro }) => {
                 </figure>
                 <div className="card-body space-y-0">
                     <h2 className="card-title text-3xl">{name}</h2>
-                    <h1 className='text-xl'>Original Price: {originalPrice}</h1>
+                    <h1 className='text-xl text-gray-400'>Original Price: {originalPrice}</h1>
                     <h1 className='text-xl'>Resale Price: <strong>{resalePrice}</strong></h1>
                     <p className='text-xl'>Used: {usedYear} {usedYear > 1 ? 'Years' : "Year"}</p>
                     <p className='text-xl'>Seller: <strong> {sellerName}</strong></p>
-                    <p className='text-xl'>{location}</p>
-                    <p className='text-xl'>{timePosted}</p>
+                    <p className='text-xl'>Location: {location}</p>
+                    <p className='text-xl'>Post: {timePosted}</p>
                     <div className="card-actions justify-end">
 
                         {!isSeller && !isAdmin &&

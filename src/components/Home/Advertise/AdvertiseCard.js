@@ -23,12 +23,18 @@ const AdvertiseCard = ({ pro }) => {
                 </figure>
                 <div className="card-body space-y-0 text-sm">
                     <h2 className="card-title text-3xl">{name}</h2>
-                    <h1 className='text-sm'>Original Price: {originalPrice}</h1>
-                    <h1 className='text-sm'>Resale Price: <strong>{resalePrice}</strong></h1>
-                    <p className='text-sm'>Used: {usedYear} {usedYear > 1 ? 'Years' : "Year"}</p>
-                    <p className='text-sm'>Seller: <strong> {sellerName}</strong></p>
-                    <p className='text-sm'>{location}</p>
-                    <p className='text-sm'>{timePosted}</p>
+                    <div className='flex justify-between items-center'>
+                    <h1 className='text-base'>Resale Price: <strong>{resalePrice}</strong></h1>
+                    <h1 className='text-sm text-gray-500'>Original Price: {originalPrice}</h1>
+                    </div>
+                    <div className='flex justify-between items-center'>
+                    <p className='text-base'>Seller: {sellerName}</p>
+                    <p className='text-base text-right'>Used: {usedYear} {usedYear > 1 ? 'Years' : "Year"}</p>
+                    </div>
+                    <div className='flex justify-between items-center'>
+                    <p className='text-base'>Location: {location}</p>
+                    <p className='text-base text-right'>Post: {timePosted}</p>
+                    </div>
                 </div>
             </div>
         </div>
