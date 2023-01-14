@@ -16,7 +16,7 @@ const FAQ = () => {
                         <p className="mt-1 dark:text-gray-400">It's so easy to sell your phone with Sell Phones BD. Sell a phone by 3 simple steps: <br />
                             1. Please first create a account and must be choose seller account. <br />
                             2. After click the dashboard and click the add product button. <br />
-                            3. See a form and fill up the form of sell phone details and your details. Click the add product button. Automatically going the my products route and see your products status and you can easily update and delete your product. <br />
+                            3. See a form and fill up the form of sell phone details. Click the add product button. Automatically going the my products route and see your products status and you can easily update and delete your product. <br />
                         </p>
                     </div>
                     <div>
