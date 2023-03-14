@@ -12,8 +12,7 @@ const Register = () => {
     const { createUser, updateUser, googleLogin, loading, setLoading } = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
     const imageHostKey = process.env.REACT_APP_IMGBB_key;
-    // const navigate = useNavigate();
-
+   
     const [createUserEmail, setCreateUserEmail] = useState('');
     const [token] = UseToken(createUserEmail);
 
